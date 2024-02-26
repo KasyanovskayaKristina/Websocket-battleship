@@ -4,6 +4,10 @@ import { webSocketDb } from "./utils/utils";
 import { userDb } from "./utils/utils";
 import { server } from "./utils/utils";
 import { webServer } from "./utils/utils";
+import {
+  addUserToRoomController,
+  createRoomController,
+} from "./controllers/createRoomController";
 
 console.log(webServer);
 
@@ -21,6 +25,14 @@ server.on("connection", (socket) => {
         regController(id, data);
         console.log(`${JSON.parse(data).name} is connected`);
         userDb.set(id, { name: JSON.parse(data).name });
+        break;
+      case "create_room":
+        createRoomController(id);
+        console.log(`Room ${id}`);
+        break;
+      case "add_user_to_room":
+        addUserToRoomController(id, data);
+        console.log(`User Room ${id}`);
         break;
       default:
         console.log(`Error check type handler: ${type}`);

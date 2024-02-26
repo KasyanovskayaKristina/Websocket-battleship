@@ -1,12 +1,18 @@
 const { resolve } = require("path");
 
-module.exports = ({ mode }) => {
+
+interface variants {
+  mode: 'production' | 'development';
+}
+
+
+module.exports = ( mode : variants) => {
   return {
     target: "node",
     entry: {
-      main: resolve(__dirname, "./index.js"),
+      main: resolve(__dirname, "src", "ws_server", "index.ts"),
     },
-    mode: mode === "prod" ? "production" : "development",
+   mode: mode.mode ?? 'development',
     output: {
       filename: "bundle.js",
       path: resolve(__dirname, "./dist"),
@@ -15,19 +21,14 @@ module.exports = ({ mode }) => {
     module: {
       rules: [
         {
-          test: /\.js$/,
+          test: /\.tsx?$/,
+          use: 'ts-loader',
           exclude: /node_modules/,
-          use: {
-            loader: "babel-loader",
-            options: {
-              presets: ["@babel/preset-env"],
-            },
-          },
         },
       ],
     },
     resolve: {
-      extensions: [".js"],
+       extensions: ['.tsx', '.ts', '.js'],
     },
     externals: {
       bufferutil: "bufferutil",

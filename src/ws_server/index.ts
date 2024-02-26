@@ -20,7 +20,7 @@ server.on("connection", (socket) => {
       case "reg":
         regController(id, data);
         console.log(`${JSON.parse(data).name} is connected`);
-        userDb[id] = { name: JSON.parse(data).name };
+        userDb.set(id, { name: JSON.parse(data).name });
         break;
       default:
         console.log(`Error check type handler: ${type}`);
@@ -28,7 +28,7 @@ server.on("connection", (socket) => {
   });
 
   socket.on("close", () => {
-    console.log(`Connection  ${id} (${userDb[id].name}) is closed`);
+    console.log(`Connection  ${id} (${userDb.get(id)?.name}) is closed`);
     userDb.delete(id);
     socket.close();
   });

@@ -1,15 +1,15 @@
-import { webSocketDb } from "../utils/utils.js";
-import { userDb } from "../utils/utils.js";
-import { requestTypes } from "../utils/utils.js";
-import { createJsonResponse } from "../utils/utils.js";
-import createUser from "../model/user.js";
+import { webSocketDb } from "../utils/utils";
+import { userDb } from "../utils/utils";
+import { requestTypes } from "../utils/utils";
+import { createJsonResponse } from "../utils/utils";
+import createUser from "../model/user";
 
-export const regController = (id, data) => {
+export const regController = (id: number, data: string) => {
   const { name, password } = JSON.parse(data);
 
   const isUsernameExist = userDb.has(name);
 
-  const newUser = new createUser(id, name, password);
+  const newUser = createUser(id, name, password);
   userDb.set(id, newUser);
 
   const responseUserData = {

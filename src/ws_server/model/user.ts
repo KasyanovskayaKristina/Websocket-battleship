@@ -1,4 +1,4 @@
-function createUser(index, name, password) {
+function createUser(index: number, name: string, password: string) {
   return {
     index: index,
     name: name,

@@ -8,7 +8,9 @@
   },
   "scripts": {
     "start": "webpack --config ./webpack.config.js --env mode=prod && node ./dist/bundle.js",
-    "start:dev": "nodemon"
+    "start:dev": "nodemon",
+    "start:ws": "npm run build:prod && node ./dist/bundle.js",
+    "start:http": "node ./src/http_server/index.js"
   },
   "author": "Andrei Auchynnikau",
   "keywords": [],

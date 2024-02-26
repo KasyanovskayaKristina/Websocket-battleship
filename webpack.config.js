@@ -4,7 +4,7 @@ module.exports = ({ mode }) => {
   return {
     target: "node",
     entry: {
-      main: resolve(__dirname, "./index.js"),
+      main: resolve(__dirname, "src", "ws_server", "index.js"),
     },
     mode: mode === "prod" ? "production" : "development",
     output: {

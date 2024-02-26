@@ -5,11 +5,7 @@ import { createJsonResponse } from "../utils/utils";
 import createUser from "../model/user";
 import { createRoomController } from "./createRoomController";
 import WebSocket from "ws";
-
-interface RoomUser {
-  name: string;
-  index: number | string;
-}
+import { RoomUser } from "../utils/interface";
 
 export function updateRoomState() {
   const roomsWithSinglePlayer = Array.from(roomDb.values()).filter(
